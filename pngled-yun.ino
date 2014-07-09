@@ -31,15 +31,15 @@ void loop() {
 	while(_server.available() < 3);
 	
 	uint8_t c = _server.read();
-	if (c != go) continue;
+	if (c != go) return;
 	
 	c = _server.read();
 	if (c == command) {
 		uint8_t rowCount = (uint8_t)_server.read();
 
-		uint8_t r, g, b;
-		for (uint8_t i = 0; i < rowCount; i++) {
-			if (i >= LED_COUNT) break;
+		uint8_t red, green, blue;
+		for (uint8_t row = 0; row < rowCount; row++) {
+			if (row >= LED_COUNT) break;
 			
 			while (_server.available() < 3);
 			
