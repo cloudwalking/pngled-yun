@@ -5,7 +5,7 @@
 #define LED_DATA_PIN 3
 #define LED_DEFAULT_BRIGHTNESS 10
 
-const char go = 0xf005ba11;
+const char go = 0x60;
 const char command = 0x00;
 
 Adafruit_NeoPixel _pixels = Adafruit_NeoPixel(LED_COUNT, LED_DATA_PIN, NEO_GRB + NEO_KHZ800);
