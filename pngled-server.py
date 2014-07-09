@@ -23,7 +23,7 @@ def out(column):
 
 def step():
 	# Send the start command.
-	printf('\x06\x00');
+	printf('\x06');
 	
 	# Pick the proper column based on how much time has gone by.
 	now = time.time()

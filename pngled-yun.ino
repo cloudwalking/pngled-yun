@@ -6,7 +6,6 @@
 #define LED_DEFAULT_BRIGHTNESS 10
 
 const char go = 0x60;
-const char command = 0x00;
 
 Adafruit_NeoPixel _pixels = Adafruit_NeoPixel(LED_COUNT, LED_DATA_PIN, NEO_GRB + NEO_KHZ800);
 Process _server;
@@ -28,26 +27,23 @@ void loop() {
 		setup();
 	}
 
-	while(_server.available() < 3);
+	while(_server.available() < 2);
 	
 	uint8_t c = _server.read();
 	if (c != go) return;
 	
-	c = _server.read();
-	if (c == command) {
-		uint8_t rowCount = (uint8_t)_server.read();
+	uint8_t rowCount = (uint8_t)_server.read();
 
-		uint8_t red, green, blue;
-		for (uint8_t row = 0; row < rowCount; row++) {
-			if (row >= LED_COUNT) break;
-			
-			while (_server.available() < 3);
-			
-			red = _server.read();
-			green = _server.read();
-			blue = _server.read();
-			_pixels.setPixelColor(row, _pixels.Color(red, green, blue));
-		}
-		_pixels.show();
+	uint8_t red, green, blue;
+	for (uint8_t row = 0; row < rowCount; row++) {
+		if (row >= LED_COUNT) break;
+		
+		while (_server.available() < 3);
+		
+		red = _server.read();
+		green = _server.read();
+		blue = _server.read();
+		_pixels.setPixelColor(row, _pixels.Color(red, green, blue));
 	}
+	_pixels.show();
 }
